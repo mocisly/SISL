@@ -190,9 +190,9 @@ ENDIF()
 
 # Set the installation prefix based on platform
 IF(WIN32)
-  SET(sisl_INSTALL_PREFIX "$ENV{PROGRAMFILES}/SINTEF/sisl" CACHE PATH "Path to install SISL")
+  SET(sisl_INSTALL_PREFIX "$ENV{PROGRAMFILES}/SINTEF/sisl" CACHE PATH "Path to install sisl")
 ELSE()
-  SET(sisl_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}" CACHE PATH "Path to install SISL")
+  SET(sisl_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}" CACHE PATH "Path to install sisl")
 ENDIF()
 
 # === Install Targets and Export CMake Package ===
@@ -200,7 +200,7 @@ include(CMakePackageConfigHelpers)
 
 # Install the sisl target with export
 install(TARGETS sisl
-    EXPORT SISLTargets
+    EXPORT sislTargets
     ARCHIVE DESTINATION ${sisl_INSTALL_PREFIX}/lib
     LIBRARY DESTINATION ${sisl_INSTALL_PREFIX}/lib
     RUNTIME DESTINATION ${sisl_INSTALL_PREFIX}/bin
@@ -214,29 +214,29 @@ install(DIRECTORY include/
 )
 
 # Export target info to a file
-install(EXPORT SISLTargets
-    FILE SISLTargets.cmake
-    #NAMESPACE SISL::             # Allow target_link_libraries(MyApp SISL::sisl)
-    DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/SISL
+install(EXPORT sislTargets
+    FILE sislTargets.cmake
+    #NAMESPACE sisl::             # Allow target_link_libraries(MyApp sisl::sisl)
+    DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/sisl
 )
 
 # Generate and install version/config files
 write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/SISLConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/sislConfigVersion.cmake"
     VERSION 4.6.0
     COMPATIBILITY SameMajorVersion
 )
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/SISLConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/SISLConfig.cmake"
-    INSTALL_DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/SISL
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/sislConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/sislConfig.cmake"
+    INSTALL_DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/sisl
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/SISLConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/SISLConfigVersion.cmake"
-    DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/SISL
+    "${CMAKE_CURRENT_BINARY_DIR}/sislConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/sislConfigVersion.cmake"
+    DESTINATION ${sisl_INSTALL_PREFIX}/lib/cmake/sisl
 )
 
 # CPack setup for packaging if needed
