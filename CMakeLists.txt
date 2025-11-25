@@ -198,6 +198,12 @@ ENDIF()
 # === Install Targets and Export CMake Package ===
 include(CMakePackageConfigHelpers)
 
+target_include_directories(sisl INTERFACE
+  $<BUILD_INTERFACE:${sisl_SOURCE_DIR}/include>
+)
+
+export(TARGETS sisl FILE sislTargets.cmake)
+
 # Install the sisl target with export
 install(TARGETS sisl
     EXPORT sislTargets
